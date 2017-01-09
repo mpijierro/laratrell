@@ -9,12 +9,6 @@ use LaraTrell\Src\TrelloWrapper;
 class DashboardController extends Controller
 {
 
-    private $workingBoards = null;
-
-    public function __construct()
-    {
-        $this->workingBoards = collect();
-    }
 
     public function dashboard()
     {

@@ -32,7 +32,6 @@ class SearcherDoingCard
 
                 if ($this->boardIsOpen($board)) {
                     $this->processBoard($board);
-                    //$this->simularteBoard($board);
                 }
             }
 
@@ -42,32 +41,6 @@ class SearcherDoingCard
 
     }
 
-    /*
-     * fixme: remove this aux method
-
-    private function simularteBoard ($board){
-
-        $cards = collect();
-
-        $card = [
-            'shortUrl' => 'http://www.google.es',
-            'name' => 'Google'
-        ];
-
-        $cards->push($card);
-
-        $card = [
-            'shortUrl' => 'http://www.hoy.es',
-            'name' => 'Hoy'
-        ];
-
-        $cards->push($card);
-
-        $board = app(BoardDoing::class, ['name' => $board['name'], 'cards'=> $cards]);
-        $this->workingBoards->push($board);
-
-    }
-    */
 
     private function boardIsOpen($board)
     {
