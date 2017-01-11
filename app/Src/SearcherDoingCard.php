@@ -25,18 +25,13 @@ class SearcherDoingCard
     public function searchDoingCard()
     {
 
-        try {
-            $boards = $this->wrapper->obtainBoardsFromUser();
+        $boards = $this->wrapper->obtainBoardsFromUser();
 
-            foreach ($boards as $board) {
+        foreach ($boards as $board) {
 
-                if ($this->boardIsOpen($board)) {
-                    $this->processBoard($board);
-                }
+            if ($this->boardIsOpen($board)) {
+                $this->processBoard($board);
             }
-
-        } catch (\Exception $e) {
-            throw $e;
         }
 
     }
