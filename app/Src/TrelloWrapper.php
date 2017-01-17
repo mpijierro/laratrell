@@ -14,7 +14,7 @@ class TrelloWrapper
     public function __construct(TrelloUser $user)
     {
         $this->user = $user;
-        //dd($this->user);
+
         $this->instanceClient();
 
     }
@@ -22,8 +22,7 @@ class TrelloWrapper
     private function instanceClient()
     {
         $this->client = new Client();
-        //$this->client->authenticate($this->user->username(), Client::AUTH_URL_TOKEN);
-        $this->client->authenticate(config('laratrell.token'), $this->user->token(), Client::AUTH_URL_CLIENT_ID);
+        $this->client->authenticate(env('TRELLO_KEY'), $this->user->token(), Client::AUTH_URL_CLIENT_ID);
     }
 
     public function obtainBoardsFromUser(): Collection
@@ -45,6 +44,11 @@ class TrelloWrapper
     public function obtainCardsFromCardList(string $listId): Collection
     {
         return collect($this->client->api('list')->cards()->filter($listId));
+    }
+
+    public function obtainOrganization(string $organizationId): array
+    {
+        return $this->client->api('organization')->show($organizationId);
     }
 
 
