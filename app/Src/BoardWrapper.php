@@ -28,7 +28,7 @@ class BoardWrapper
         return $this->board['idOrganization'];
     }
 
-    public function boardIsOpen()
+    public function isOpen()
     {
         return ! $this->board['closed'];
     }

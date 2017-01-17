@@ -8,24 +8,18 @@ class SearcherDoingCard
     const NAME_LIST_DOING_IN_TRELLO = 'Doing';
 
     private $wrapper;
-    private $organizations;
+
     private $workingBoards;
 
     public function __construct(TrelloWrapper $wrapper)
     {
         $this->wrapper = $wrapper;
         $this->workingBoards = collect();
-        $this->organizations = collect();
     }
 
     public function getWorkingBoards()
     {
         return $this->workingBoards;
-    }
-
-    public function getOrganizations()
-    {
-        return $this->organizations;
     }
 
     public function searchDoingCard()
@@ -35,32 +29,17 @@ class SearcherDoingCard
 
         foreach ($boards as $itemBoard) {
 
-            $boardWrapper = app(BoardWrapper::class, ['board' => $itemBoard]);
+            try {
+                $boardWrapper = app(BoardWrapper::class, ['board' => $itemBoard]);
 
-            if ($boardWrapper->boardIsOpen()) {
-
-                if ( ! is_null($boardWrapper->getIdOrganization())) {
-                    $this->obtainOrganization($boardWrapper->getIdOrganization());
+                if ($boardWrapper->boardIsOpen()) {
+                    $this->processBoard($boardWrapper);
                 }
-
-                $this->processBoard($boardWrapper);
+            } catch (\Exception $e) {
+                dd($e, $itemBoard);
             }
-        }
 
-    }
 
-    private function obtainOrganization(string $idOrganization)
-    {
-
-        $existsOrganization = isset($this->organizations[$idOrganization]);
-
-        if ( ! $existsOrganization) {
-
-            $organization = $this->wrapper->obtainOrganization($idOrganization);
-
-            $organizationWrapper = app(OrganizationWrapper::class, ['organization' => $organization]);
-
-            $this->organizations->put($organizationWrapper->getId(), $organization);
         }
 
     }
@@ -97,7 +76,7 @@ class SearcherDoingCard
 
         $doingCards = $this->wrapper->obtainCardsFromCardList($listDoing['id']);
 
-        $boardDoing = app(BoardDoing::class, ['name' => $board->getName(), 'cards' => $doingCards]);
+        $boardDoing = app(BoardDoing::class, ['boardWrapper' => $board, 'cards' => $doingCards]);
 
         $this->workingBoards->push($boardDoing);
 

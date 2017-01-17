@@ -30,13 +30,15 @@
 
     <div class="row">
         <div class="col-xs-12">
+
             @foreach ($workingBoards as $boardDoing)
 
                 <div class="col-xs-12 col-sm-3">
 
                     <h3 class="header smaller lighter green">
                         <i class="ace-icon fa fa-bullhorn"></i>
-                        {!! $boardDoing->getName() !!}
+
+                        {!! $organizations->getOrganizationNameById($boardDoing->getIdOrganization()) !!} - {!! $boardDoing->getName() !!}
                     </h3>
 
                     <div class="alert alert-info">

@@ -9,20 +9,26 @@ use Illuminate\Support\Collection;
 class BoardDoing
 {
 
-    private $originalData = [];
-    private $name;
+    /**
+     * @var BoardWrapper
+     */
+    private $boardWrapper;
     private $cardsDoing;
 
-    public function __construct($name, Collection $cards)
+    public function __construct(BoardWrapper $boardWrapper, Collection $cards)
     {
-        $this->name = $name;
+        $this->boardWrapper = $boardWrapper;
         $this->cardsDoing = $cards;
     }
 
+    public function getIdOrganization()
+    {
+        return $this->boardWrapper->getIdOrganization();
+    }
 
     public function getName()
     {
-        return $this->name;
+        return $this->boardWrapper->getName();
     }
 
     public function getCardsDoing()
