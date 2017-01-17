@@ -3,6 +3,7 @@
 namespace LaraTrell\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use SocialiteProviders\Manager\SocialiteWasCalled;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -12,9 +13,10 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'LaraTrell\Events\SomeEvent' => [
-            'LaraTrell\Listeners\EventListener',
-        ],
+        SocialiteWasCalled::class => [
+            // add your listeners (aka providers) here
+            'SocialiteProviders\Trello\TrelloExtendSocialite@handle',
+        ]
     ];
 
     /**

@@ -9,27 +9,26 @@ class TrelloWrapper
 {
 
     private $client;
-    private $username;
+    private $user;
 
-    public function __construct($username)
+    public function __construct(TrelloUser $user)
     {
-
+        $this->user = $user;
+        //dd($this->user);
         $this->instanceClient();
-
-        $this->username = $username;
 
     }
 
     private function instanceClient()
     {
-
         $this->client = new Client();
-        $this->client->authenticate(config('laratrell.token'), config('laratrell.password'), Client::AUTH_URL_CLIENT_ID);
+        //$this->client->authenticate($this->user->username(), Client::AUTH_URL_TOKEN);
+        $this->client->authenticate(config('laratrell.token'), $this->user->token(), Client::AUTH_URL_CLIENT_ID);
     }
 
     public function obtainBoardsFromUser(): Collection
     {
-        return collect($this->client->api('members')->boards()->all($this->username));
+        return collect($this->client->api('members')->boards()->all($this->user->username()));
     }
 
     public function obtainBoard(string $boardId): array

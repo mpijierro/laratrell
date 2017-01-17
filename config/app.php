@@ -177,7 +177,9 @@ return [
         // LaraTrell\Providers\BroadcastServiceProvider::class,
         LaraTrell\Providers\EventServiceProvider::class,
         LaraTrell\Providers\RouteServiceProvider::class,
-        \Gregoriohc\LaravelTrello\TrelloServiceProvider::class
+        \Gregoriohc\LaravelTrello\TrelloServiceProvider::class,
+
+        \SocialiteProviders\Manager\ServiceProvider::class,
 
     ],
 
@@ -227,7 +229,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
-        'Trello' => \Gregoriohc\LaravelTrello\Facades\Wrapper::class
+        'Trello' => \Gregoriohc\LaravelTrello\Facades\Wrapper::class,
+
+        'Socialize' => 'Laravel\Socialite\Facades\Socialite',
 
     ],
 
