@@ -10,30 +10,43 @@ class BoardDoing
 {
 
     /**
+     * @var OrganizationWrapper
+     */
+    private $organization;
+    /**
      * @var BoardWrapper
      */
-    private $boardWrapper;
-    private $cardsDoing;
+    private $board;
+    /**
+     * @var ListBoardWrapper
+     */
+    private $list;
+    /**
+     * @var Collection
+     */
+    private $cards;
 
-    public function __construct(BoardWrapper $boardWrapper, Collection $cards)
+    public function __construct(OrganizationWrapper $organization, BoardWrapper $board, ListBoardWrapper $list, Collection $cards)
     {
-        $this->boardWrapper = $boardWrapper;
-        $this->cardsDoing = $cards;
+        $this->organization = $organization;
+        $this->board = $board;
+        $this->list = $list;
+        $this->cards = $cards;
     }
 
-    public function getIdOrganization()
+    public function getBoardName()
     {
-        return $this->boardWrapper->getIdOrganization();
+        return $this->board->getName();
     }
 
-    public function getName()
+    public function getOrganizationName()
     {
-        return $this->boardWrapper->getName();
+        return $this->organization->getDisplayName();
     }
 
-    public function getCardsDoing()
+    public function getCards()
     {
-        return $this->cardsDoing;
+        return $this->cards;
     }
 
 }

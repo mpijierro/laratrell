@@ -3,31 +3,43 @@
 namespace LaraTrell\Src;
 
 
+use Illuminate\Support\Collection;
+
 class Cards
 {
 
     private $wrapper;
+    private $listsBoards;
     private $cards;
 
-    public function __construct(TrelloWrapper $wrapper)
+    public function __construct(TrelloWrapper $wrapper, Collection $listsBoards)
     {
         $this->wrapper = $wrapper;
+        $this->listsBoards = $listsBoards;
         $this->cards = collect();
 
         $this->obtainCards();
 
     }
 
+    public function getCards()
+    {
+        return $this->cards;
+    }
+
     private function obtainCards()
     {
 
-        $cards = $this->wrapper->obtainCards();
+        foreach ($this->listsBoards as $listBoardWrapper) {
 
-        foreach ($cards as $card) {
+            $cards = $this->wrapper->obtainCardsFromCardList($listBoardWrapper->getId());
 
-            $cardWrapper = app(CardWrapper::class, ['card' => $card]);
+            foreach ($cards as $card) {
 
-            $this->cards->put($cardWrapper->getId(), $cardWrapper);
+                $cardWrapper = app(CardWrapper::class, ['card' => $card]);
+
+                $this->cards->put($cardWrapper->getId(), $cardWrapper);
+            }
 
         }
 
@@ -40,12 +52,17 @@ class Cards
 
     public function getCardNameById(string $idCard = null): string
     {
-        if (is_null($idCard)) {
-            return '';
-        }
+
         $card = $this->getCardByIdOrNull($idCard);
 
         return ! is_null($card) ? $card->getDisplayName() : '';
+    }
+
+    public function getCardByIdList($idList): Collection
+    {
+        return $this->cards->filter(function ($cardWrapper) use ($idList) {
+            return $cardWrapper->getIdList() == $idList;
+        });
     }
 
 }

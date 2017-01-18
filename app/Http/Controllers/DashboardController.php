@@ -2,12 +2,13 @@
 
 namespace LaraTrell\Http\Controllers;
 
+use Illuminate\Support\Collection;
 use LaraTrell\Http\Requests;
 use LaraTrell\Src\Boards;
+use LaraTrell\Src\BuilderDashboard;
 use LaraTrell\Src\Cards;
 use LaraTrell\Src\ListsBoards;
 use LaraTrell\Src\Organizations;
-use LaraTrell\Src\SearcherDoingCard;
 use LaraTrell\Src\TrelloUser;
 use LaraTrell\Src\TrelloWrapper;
 
@@ -35,13 +36,19 @@ class DashboardController extends Controller
 
             $boards = $this->obtainBoards();
 
-            $lists = $this->obtainLists();
+            $lists = $this->obtainLists($boards);
 
-            $cards = $this->obtainCards();
+            $cards = $this->obtainCards($lists->obtainListNamedAs('Doing'));
 
-            dd($organizations, $boards, $lists, $cards);
+            $builder = app(BuilderDashboard::class, [
+                'organizations' => $organizations,
+                'boards' => $boards,
+                'lists' => $lists,
+                'cards' => $cards
+            ]);
+            $builder->build();
 
-            $this->obtainWorkingBoards();
+            view()->share('builder', $builder);
 
             return view('dashboard');
 
@@ -74,26 +81,17 @@ class DashboardController extends Controller
         return app(Boards::class, ['wrapper' => $this->wrapper]);
     }
 
-    private function obtainLists(): ListsBoards
+    private function obtainLists(Boards $boards): ListsBoards
     {
 
-        return app(ListsBoards::class, ['wrapper' => $this->wrapper]);
+        return app(ListsBoards::class, ['wrapper' => $this->wrapper, 'boards' => $boards]);
     }
 
-    private function obtainCards(): Cards
+    private function obtainCards(Collection $lists): Cards
     {
 
-        return app(Cards::class, ['wrapper' => $this->wrapper]);
+        return app(Cards::class, ['wrapper' => $this->wrapper, 'listsBoards' => $lists]);
 
-    }
-
-    private function obtainWorkingBoards()
-    {
-
-        $searcher = app(SearcherDoingCard::class, ['wrapper' => $this->wrapper]);
-        $searcher->searchDoingCard();
-
-        view()->share('workingBoards', $searcher->getWorkingBoards());
     }
 
 }

@@ -31,19 +31,19 @@
     <div class="row">
         <div class="col-xs-12">
 
-            @foreach ($workingBoards as $boardDoing)
+            @foreach ($builder->getBoardsDoing() as $boardDoing)
 
                 <div class="col-xs-12 col-sm-3">
 
                     <h3 class="header smaller lighter green">
                         <i class="ace-icon fa fa-bullhorn"></i>
 
-                        {!! $organizations->getOrganizationNameById($boardDoing->getIdOrganization()) !!} - {!! $boardDoing->getName() !!}
+                        {!! $boardDoing->getOrganizationName() !!} - {!! $boardDoing->getBoardName() !!}
                     </h3>
 
                     <div class="alert alert-info">
-                        @foreach ($boardDoing->getCardsDoing() as $card)
-                            * <a href='{!! $card['shortUrl'] !!}' target='_blank' title="Show card in Trello">{!! $card['name'] !!}</a><br><br>
+                        @foreach ($boardDoing->getCards() as $card)
+                            * <a href='{!! $card->getShortUrl() !!}' target='_blank' title="Show card in Trello">{!! $card->getName() !!}</a><br><br>
                         @endforeach
                     </div>
 

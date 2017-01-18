@@ -33,19 +33,9 @@ class Organizations
 
     }
 
-    public function getOrganizationByIdOrNull(string $idOrganization): OrganizationWrapper
+    public function getOrganizationByIdOrNull(string $idOrganization)//: ?OrganizationWrapper
     {
         return $this->organizations->get($idOrganization);
-    }
-
-    public function getOrganizationNameById(string $idOrganization = null): string
-    {
-        if (is_null($idOrganization)) {
-            return '';
-        }
-        $organization = $this->getOrganizationByIdOrNull($idOrganization);
-
-        return ! is_null($organization) ? $organization->getDisplayName() : '';
     }
 
 }

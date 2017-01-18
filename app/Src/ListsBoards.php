@@ -3,6 +3,8 @@
 namespace LaraTrell\Src;
 
 
+use Illuminate\Support\Collection;
+
 class ListsBoards
 {
 
@@ -19,6 +21,12 @@ class ListsBoards
         $this->obtainListsBoards();
 
     }
+
+    public function getBoardsLists()
+    {
+        return $this->boardsList;
+    }
+
 
     private function obtainListsBoards()
     {
@@ -53,15 +61,16 @@ class ListsBoards
     }
 
 
-    private function obtainListDoing($listsCard)
+    public function obtainListNamedAs(string $name): Collection
     {
 
-        return $listsCard->filter(function ($list) {
-            return $list['name'] == self::NAME_LIST_DOING_IN_TRELLO;
-        })->first();
+        return $this->boardsList->filter(function ($list) use ($name) {
+            return $list->getName() == $name;
+        });
 
     }
 
+    /*
     private function createBoardDoing(BoardWrapper $board, $listDoing)
     {
 
@@ -85,5 +94,6 @@ class ListsBoards
 
         return ! is_null($idListBoard) ? $listBoard->getName() : '';
     }
+    */
 
 }

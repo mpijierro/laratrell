@@ -18,6 +18,16 @@ class CardWrapper
         return $this->card['id'];
     }
 
+    public function getIdBoard()
+    {
+        return $this->card['idBoard'];
+    }
+
+    public function getIdList()
+    {
+        return $this->card['idList'];
+    }
+
     public function getName()
     {
         return $this->card['name'];
@@ -33,5 +43,8 @@ class CardWrapper
         return ! $this->card['closed'];
     }
 
-
+    public function getShortUrl()
+    {
+        return $this->card['shortUrl'];
+    }
 }

@@ -18,6 +18,11 @@ class ListBoardWrapper
         return $this->list['id'];
     }
 
+    public function getIdBoard()
+    {
+        return $this->list['idBoard'];
+    }
+
     public function getName()
     {
         return $this->list['name'];
@@ -26,6 +31,11 @@ class ListBoardWrapper
     public function isOpen()
     {
         return ! $this->list['closed'];
+    }
+
+    public function isNamed($name)
+    {
+        return ($this->list['name'] == $name);
     }
 
 }
