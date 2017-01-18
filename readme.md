@@ -11,8 +11,8 @@ Documentation is under development...
 
 1. Clone project
 2. Composer install
-3. Config login to Trello with your personal data. Fill config/laratrell.php
-4. Run
+3. Config Trello Socialite Provider: http://socialiteproviders.github.io/providers/trello/
+4. Go to  /auth/trello
 
 
 ## License
