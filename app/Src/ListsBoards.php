@@ -70,30 +70,4 @@ class ListsBoards
 
     }
 
-    /*
-    private function createBoardDoing(BoardWrapper $board, $listDoing)
-    {
-
-        $doingCards = $this->wrapper->obtainCardsFromCardList($listDoing['id']);
-
-        $boardDoing = app(BoardDoing::class, ['boardWrapper' => $board, 'cards' => $doingCards]);
-
-        $this->workingBoards->push($boardDoing);
-
-    }
-
-
-    public function getListBoardByIdOrNull(string $idListBoard): ListBoardWrapper
-    {
-        return $this->boardsList->get($idListBoard);
-    }
-
-    public function getListListBoardNameById(string $idListBoard = null): string
-    {
-        $iistBoard = $this->getListBoardByIdOrNull($idListBoard);
-
-        return ! is_null($idListBoard) ? $listBoard->getName() : '';
-    }
-    */
-
 }
