@@ -1,6 +1,6 @@
 <?php
 
-namespace LaraTrell\Src;
+namespace LaraTrell\Src\Wrapper;
 
 use Illuminate\Support\Collection;
 use Trello\Client;
@@ -11,7 +11,7 @@ class TrelloWrapper
     private $client;
     private $user;
 
-    public function __construct(TrelloUser $user)
+    public function __construct(UserWrapper $user)
     {
         $this->user = $user;
 

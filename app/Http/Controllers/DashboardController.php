@@ -9,14 +9,14 @@ use LaraTrell\Src\BuilderDashboard;
 use LaraTrell\Src\Cards;
 use LaraTrell\Src\ListsBoards;
 use LaraTrell\Src\Organizations;
-use LaraTrell\Src\TrelloUser;
-use LaraTrell\Src\TrelloWrapper;
+use LaraTrell\Src\Wrapper\TrelloWrapper;
+use LaraTrell\Src\Wrapper\UserWrapper;
 
 class DashboardController extends Controller
 {
 
     /**
-     * @var TrelloUser;
+     * @var UserWrapper;
      */
     private $user;
     /**
@@ -61,7 +61,7 @@ class DashboardController extends Controller
     private function initialize()
     {
 
-        $this->user = app(TrelloUser::class);
+        $this->user = app(UserWrapper::class);
 
         $this->wrapper = app(TrelloWrapper::class, ['user' => $this->user]);
     }

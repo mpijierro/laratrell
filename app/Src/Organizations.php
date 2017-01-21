@@ -2,6 +2,8 @@
 
 namespace LaraTrell\Src;
 
+use LaraTrell\Src\Wrapper\OrganizationWrapper;
+use LaraTrell\Src\Wrapper\TrelloWrapper;
 
 class Organizations
 {

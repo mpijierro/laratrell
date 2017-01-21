@@ -2,6 +2,7 @@
 
 namespace LaraTrell\Src;
 
+use LaraTrell\Src\Wrapper\OrganizationWrapper;
 
 class BuilderDashboard
 {

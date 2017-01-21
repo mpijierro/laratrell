@@ -1,10 +1,10 @@
 <?php
 
-namespace LaraTrell\Src;
+namespace LaraTrell\Src\Wrapper;
 
 use Laravel\Socialite\Facades\Socialite;
 
-class TrelloUser
+class UserWrapper
 {
 
     private $user;

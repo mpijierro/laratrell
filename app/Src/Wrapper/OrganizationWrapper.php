@@ -1,7 +1,6 @@
 <?php
 
-
-namespace LaraTrell\Src;
+namespace LaraTrell\Src\Wrapper;
 
 class OrganizationWrapper
 {

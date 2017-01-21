@@ -2,6 +2,8 @@
 
 namespace LaraTrell\Src;
 
+use LaraTrell\Src\Wrapper\BoardWrapper;
+use LaraTrell\Src\Wrapper\TrelloWrapper;
 
 class Boards
 {

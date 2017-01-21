@@ -2,8 +2,9 @@
 
 namespace LaraTrell\Src;
 
-
 use Illuminate\Support\Collection;
+use LaraTrell\Src\Wrapper\CardWrapper;
+use LaraTrell\Src\Wrapper\TrelloWrapper;
 
 class Cards
 {

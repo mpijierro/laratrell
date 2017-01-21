@@ -2,8 +2,11 @@
 
 namespace LaraTrell\Src;
 
-
 use Illuminate\Support\Collection;
+use LaraTrell\Src\Wrapper\BoardWrapper;
+use LaraTrell\Src\Wrapper\ListBoardWrapper;
+use LaraTrell\Src\Wrapper\TrelloWrapper;
+
 
 class ListsBoards
 {
