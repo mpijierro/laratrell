@@ -1,8 +1,7 @@
 <?php
 
-namespace LaraTrell\Http\Controllers\Auth;
+namespace LaraTrell\Http\Controllers;
 
-use LaraTrell\Http\Controllers\Controller;
 use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller

@@ -32,6 +32,7 @@ class DashboardController extends Controller
 
             $this->initialize();
 
+            /*
             $organizations = $this->obtainOrganizations();
 
             $boards = $this->obtainBoards();
@@ -39,6 +40,12 @@ class DashboardController extends Controller
             $lists = $this->obtainLists($boards);
 
             $cards = $this->obtainCards($lists->obtainListNamedAs('Doing'));
+            */
+
+            $organizations = app(Organizations::class);
+            $boards = app(Boards::class);
+            $lists = app(ListsBoards::class);
+            $cards = app(Cards::class);
 
             $builder = app(BuilderDashboard::class, [
                 'organizations' => $organizations,
@@ -52,6 +59,8 @@ class DashboardController extends Controller
 
             return view('dashboard');
 
+        } catch (\InvalidArgumentException $e) {
+            return redirect()->route('home')->withErrors(['errors' => trans('laratrell.token_missing')]);
         } catch (\Exception $e) {
             abort(500, $e->getMessage());
         }
