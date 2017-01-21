@@ -89,6 +89,6 @@ class BuilderDashboard
 
     private function obtainOrganizationWrapperWithoutOrganization()
     {
-        return app(OrganizationWrapper::class, ['organization' => ['displayName' => 'Without Organization']]);
+        return app(OrganizationWrapper::class, ['organization' => ['displayName' => trans('laratrell.without_organization')]]);
     }
 }

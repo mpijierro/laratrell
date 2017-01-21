@@ -36,7 +36,7 @@ class UserWrapper
 
     public function username()
     {
-        return $this->nickName();
+        return $this->dataUser()['username'];
     }
 
     public function getUserId()
