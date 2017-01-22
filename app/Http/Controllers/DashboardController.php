@@ -3,6 +3,7 @@
 namespace LaraTrell\Http\Controllers;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use LaraTrell\Http\Requests;
 use LaraTrell\Src\Boards;
 use LaraTrell\Src\BuilderDashboard;
@@ -34,6 +35,8 @@ class DashboardController extends Controller
         try {
 
             $this->initialize();
+
+            return view('dashboard');
 
             $organizations = $this->obtainOrganizations();
 
@@ -74,6 +77,8 @@ class DashboardController extends Controller
 
         $configureUser = app(ConfigureUser::class, ['userWrapper' => $this->user]);
         $configureUser->configure();
+
+        Auth::loginUsingId($configureUser->getUser()->id);
 
         $this->wrapper = app(TrelloWrapper::class, ['user' => $this->user]);
     }

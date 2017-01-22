@@ -13,6 +13,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('trello_id')->unique();
             $table->string('trello_username')->unique();
+            $table->rememberToken();
         });
     }
 

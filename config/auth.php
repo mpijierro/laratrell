@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => LaraTrell\User::class,
+            'model' => \LaraTrell\Src\User::class,
         ],
 
         // 'users' => [

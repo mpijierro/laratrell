@@ -11,3 +11,10 @@ Route::get('dashboard', ['as' => 'dashboard', 'uses' => "DashboardController@das
 
 Route::get('auth/trello', ['as' => 'authWithTrello', 'uses' => 'AuthController@redirectToProvider']);
 Route::get('auth/trello/callback', ['as' => 'authCallback', 'uses' => 'AuthController@handleProviderCallback']);
+
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('user-list', ['as' => 'userList', 'uses' => "UserListController@index"]);
+
+});
+
