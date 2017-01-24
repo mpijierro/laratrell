@@ -14,6 +14,7 @@ class ConfigureUser
     public function __construct(UserWrapper $userWrapper)
     {
         $this->userWrapper = $userWrapper;
+        $this->configure();
     }
 
     public function getUser()
@@ -21,7 +22,7 @@ class ConfigureUser
         return $this->user;
     }
 
-    public function configure()
+    private function configure()
     {
 
         $trelloIdentification = [

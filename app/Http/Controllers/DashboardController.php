@@ -64,7 +64,6 @@ class DashboardController extends Controller
         } catch (CredentialsException $e) {
             return redirect()->route('home')->withErrors(['errors' => trans('laratrell.token_missing')]);
         } catch (\Exception $e) {
-            dd($e);
             abort(500, $e->getMessage());
         }
 
@@ -76,7 +75,6 @@ class DashboardController extends Controller
         $this->user = app(UserWrapper::class);
 
         $configureUser = app(ConfigureUser::class, ['userWrapper' => $this->user]);
-        $configureUser->configure();
 
         Auth::loginUsingId($configureUser->getUser()->id);
 
