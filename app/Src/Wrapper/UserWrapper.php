@@ -11,16 +11,34 @@ class UserWrapper
 
     public function __construct()
     {
-        $this->user = Socialite::driver('trello')->user();
+        if (session()->has('trello_user')) {
+            $this->user = session()->get('trello_user');
+        } else {
+            $this->user = Socialite::driver('trello')->user();
+        }
     }
 
     private function dataUser()
     {
+
+        //FIXME: Remove this conditions
+        if (session()->has('trello_user')) {
+            return $this->user;
+        }
+
         return $this->user->user;
+    }
+
+    public function getUser()
+    {
+        return $this->dataUser();
     }
 
     public function token()
     {
+        if (session()->has('oauth_token')) {
+            return session()->get('oauth_token');
+        }
         return $this->user->token;
     }
 
@@ -49,5 +67,22 @@ class UserWrapper
         return $this->dataUser()['idBoards'];
     }
 
+    public function oauthToken()
+    {
+        if (session()->has('oauth_token')) {
+            return session()->get('oauth_token');
+        }
+
+        return $this->user->accessTokenResponseBody['oauth_token'];
+    }
+
+    public function oauthTokenSecret()
+    {
+        if (session()->has('oauth_token_secret')) {
+            return session()->get('oauth_token_secret');
+        }
+
+        return $this->user->accessTokenResponseBody['oauth_token_secret'];
+    }
 
 }

@@ -19,7 +19,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
+                <li class="active"><a href="{!! route('dashboard') !!}">Home</a></li>
                 <li><a href="{!! route('userList') !!}">Lists</a></li>
             </ul>
         </div>

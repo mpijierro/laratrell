@@ -3,7 +3,6 @@
 namespace LaraTrell\Http\Controllers;
 
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
 use LaraTrell\Http\Requests;
 use LaraTrell\Src\Boards;
 use LaraTrell\Src\BuilderDashboard;
@@ -34,6 +33,7 @@ class DashboardController extends Controller
 
         try {
 
+//Auth::logout(); session()->flush(); return redirect()->route('home');
             $this->initialize();
 
             return view('dashboard');
@@ -45,7 +45,6 @@ class DashboardController extends Controller
             $lists = $this->obtainLists($boards);
 
             $cards = $this->obtainCards($lists->obtainListNamedAs('Doing'));
-
 
             $builder = app(BuilderDashboard::class, [
                 'organizations' => $organizations,
@@ -64,6 +63,7 @@ class DashboardController extends Controller
         } catch (CredentialsException $e) {
             return redirect()->route('home')->withErrors(['errors' => trans('laratrell.token_missing')]);
         } catch (\Exception $e) {
+            throw  $e;
             abort(500, $e->getMessage());
         }
 
@@ -75,8 +75,6 @@ class DashboardController extends Controller
         $this->user = app(UserWrapper::class);
 
         $configureUser = app(ConfigureUser::class, ['userWrapper' => $this->user]);
-
-        Auth::loginUsingId($configureUser->getUser()->id);
 
         $this->wrapper = app(TrelloWrapper::class, ['user' => $this->user]);
     }
