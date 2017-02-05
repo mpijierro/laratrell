@@ -5,8 +5,8 @@ namespace LaraTrell\Http\Controllers;
 use Illuminate\Support\Collection;
 use LaraTrell\Http\Requests;
 use LaraTrell\Src\Boards;
+use LaraTrell\Src\BuilderDashboard;
 use LaraTrell\Src\Cards;
-use LaraTrell\Src\ConfigureUser;
 use LaraTrell\Src\ListsBoards;
 use LaraTrell\Src\Organizations;
 use LaraTrell\Src\Wrapper\TrelloWrapper;
@@ -28,29 +28,10 @@ class DashboardController extends Controller
 
         try {
 
-            $user = app(UserSessionWrapper::class);
-            view()->share('user', $user);
-            $this->trelloWrapper = app(TrelloWrapper::class, ['user' => $user]);
+            $this->initialize();
 
-            /*
-            $organizations = $this->obtainOrganizations();
+            $this->configDashboardView();
 
-            $boards = $this->obtainBoards();
-
-            $lists = $this->obtainLists($boards);
-
-            $cards = $this->obtainCards($lists->obtainListNamedAs('Doing'));
-
-            $builder = app(BuilderDashboard::class, [
-                'organizations' => $organizations,
-                'boards' => $boards,
-                'lists' => $lists,
-                'cards' => $cards
-            ]);
-            $builder->build();
-
-            view()->share('builder', $builder);
-*/
             return view('dashboard');
 
         } catch (\InvalidArgumentException $e) {
@@ -58,12 +39,36 @@ class DashboardController extends Controller
         } catch (CredentialsException $e) {
             return redirect()->route('home')->withErrors(['errors' => trans('laratrell.token_missing')]);
         } catch (\Exception $e) {
-            throw  $e;
             abort(500, $e->getMessage());
         }
 
     }
 
+    private function initialize()
+    {
+
+        $user = app(UserSessionWrapper::class);
+
+        $this->trelloWrapper = app(TrelloWrapper::class, ['user' => $user]);
+
+    }
+
+    private function configDashboardView()
+    {
+
+        $organizations = $this->obtainOrganizations();
+
+        $boards = $this->obtainBoards();
+
+        $lists = $this->obtainLists($boards);
+
+        $cards = $this->obtainCards($lists->obtainListNamedAs('Doing'));
+
+        $builder = app(BuilderDashboard::class, ['organizations' => $organizations, 'boards' => $boards, 'lists' => $lists, 'cards' => $cards]);
+
+        view()->share('builder', $builder);
+
+    }
 
 
     private function obtainOrganizations(): Organizations

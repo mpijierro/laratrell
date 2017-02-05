@@ -24,6 +24,8 @@ class BuilderDashboard
 
         $this->boardsDoing = collect();
 
+        $this->build();
+
     }
 
     public function getBoardsDoing()
