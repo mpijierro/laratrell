@@ -1,0 +1,17 @@
+magephp:
+    environments:
+        produccion:
+            user:
+            host_path:
+            releases: 0
+            exclude:
+                - ./storage/*
+                - ./tests/*
+                - ./vendor/*
+                - .env
+                - .env.prod
+                - .env.testing
+                - .mage.yml
+            hosts:
+                -
+            rsync: -avz --delete
