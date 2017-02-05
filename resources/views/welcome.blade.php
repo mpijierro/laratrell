@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-@include('head')
+    @include('head')
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
-    <!-- Styles -->
     <style>
         html, body {
             background-color: #fff;
@@ -58,6 +54,14 @@
         .m-b-md {
             margin-bottom: 30px;
         }
+
+        .github_link > a {
+            display: inline;
+            bottom: 50px;
+            margin-top: 100px;
+            text-transform: none;
+
+        }
     </style>
 </head>
 <body>
@@ -82,8 +86,16 @@
 
 
         <div class="links">
-            <a href="{!! route('authWithTrello') !!}">Login with Trello</a>
+            <a href="{!! route('authWithTrello') !!}">Sign in with Trello</a>
         </div>
+
+        <p style="margin-top:100px">Visualiza en una sola pantalla todas las tarjetas de todas las listas 'Doing' de todos tus proyectos y clientes.</p>
+
+        <div class="links github_link" style="margin-top:150px">
+            <a href="https://github.com/mpijierro/laratrell" target="_blank"><i class="fa fa-github-alt"></i>&nbsp;&nbsp;GitHub</a>
+            <a href="http://www.mandev.es/cv" target="_blank"><i class="fa fa-user"></i>&nbsp;&nbsp;about me</a>
+        </div>
+
     </div>
 </div>
 </body>

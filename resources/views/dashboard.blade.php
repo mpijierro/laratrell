@@ -20,6 +20,7 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{!! route('dashboard') !!}">Home</a></li>
+                <li class="active"><a href="https://github.com/mpijierro/laratrell" target="_blank">GitHub</a></li>
                 <li><a href="{!! route('logout') !!}">Logout</a></li>
             </ul>
         </div>
