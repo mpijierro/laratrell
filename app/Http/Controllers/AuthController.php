@@ -2,10 +2,14 @@
 
 namespace LaraTrell\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use LaraTrell\Src\InitializeUser;
+use LaraTrell\Src\Wrapper\UserTrelloWrapper;
 use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
+
     /**
      * Redirect the user to the Trello authentication page.
      *
@@ -24,10 +28,20 @@ class AuthController extends Controller
     public function handleProviderCallback()
     {
 
-        $user = Socialite::driver('trello')->user();
+        $user = app(UserTrelloWrapper::class);
 
-        dd($user);
+        $initialize = app(InitializeUser::class, ['userWrapper' => $user]);
 
-        // $user->token;
+        return redirect()->route('dashboard');
     }
+
+    public function logout()
+    {
+
+        Auth::logout();
+
+        return redirect()->route('home');
+
+    }
+
 }

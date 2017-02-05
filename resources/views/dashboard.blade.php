@@ -20,7 +20,7 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{!! route('dashboard') !!}">Home</a></li>
-                <li><a href="{!! route('userList') !!}">Lists</a></li>
+                <li><a href="{!! route('logout') !!}">Logout</a></li>
             </ul>
         </div>
     </div>
@@ -30,8 +30,7 @@
 
     <div class="row">
         <div class="col-xs-12">
-            asdf
-            <?php /*
+
             @foreach ($builder->getBoardsDoing() as $boardDoing)
 
                 <div class="col-xs-12 col-sm-3">
@@ -52,7 +51,7 @@
                 </div>
 
             @endforeach
- */ ?>
+
         </div>
 
     </div>

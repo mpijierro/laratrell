@@ -11,7 +11,7 @@ class TrelloWrapper
     private $client;
     private $user;
 
-    public function __construct(UserWrapper $user)
+    public function __construct(UserInterfaceWrapper $user)
     {
         $this->user = $user;
 

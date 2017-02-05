@@ -5,13 +5,12 @@ namespace LaraTrell\Http\Controllers;
 use Illuminate\Support\Collection;
 use LaraTrell\Http\Requests;
 use LaraTrell\Src\Boards;
-use LaraTrell\Src\BuilderDashboard;
 use LaraTrell\Src\Cards;
 use LaraTrell\Src\ConfigureUser;
 use LaraTrell\Src\ListsBoards;
 use LaraTrell\Src\Organizations;
 use LaraTrell\Src\Wrapper\TrelloWrapper;
-use LaraTrell\Src\Wrapper\UserWrapper;
+use LaraTrell\Src\Wrapper\UserSessionWrapper;
 use League\OAuth1\Client\Credentials\CredentialsException;
 
 
@@ -19,13 +18,9 @@ class DashboardController extends Controller
 {
 
     /**
-     * @var UserWrapper;
-     */
-    private $user;
-    /**
      * @var TrelloWrapper
      */
-    private $wrapper;
+    private $trelloWrapper;
 
 
     public function dashboard()
@@ -33,11 +28,11 @@ class DashboardController extends Controller
 
         try {
 
-//Auth::logout(); session()->flush(); return redirect()->route('home');
-            $this->initialize();
+            $user = app(UserSessionWrapper::class);
+            view()->share('user', $user);
+            $this->trelloWrapper = app(TrelloWrapper::class, ['user' => $user]);
 
-            return view('dashboard');
-
+            /*
             $organizations = $this->obtainOrganizations();
 
             $boards = $this->obtainBoards();
@@ -55,7 +50,7 @@ class DashboardController extends Controller
             $builder->build();
 
             view()->share('builder', $builder);
-
+*/
             return view('dashboard');
 
         } catch (\InvalidArgumentException $e) {
@@ -69,20 +64,12 @@ class DashboardController extends Controller
 
     }
 
-    private function initialize()
-    {
 
-        $this->user = app(UserWrapper::class);
-
-        $configureUser = app(ConfigureUser::class, ['userWrapper' => $this->user]);
-
-        $this->wrapper = app(TrelloWrapper::class, ['user' => $this->user]);
-    }
 
     private function obtainOrganizations(): Organizations
     {
 
-        return app(Organizations::class, ['wrapper' => $this->wrapper]);
+        return app(Organizations::class, ['wrapper' => $this->trelloWrapper]);
 
         view()->share('organizations', $organizations);
 
@@ -91,19 +78,19 @@ class DashboardController extends Controller
     private function obtainBoards(): Boards
     {
 
-        return app(Boards::class, ['wrapper' => $this->wrapper]);
+        return app(Boards::class, ['wrapper' => $this->trelloWrapper]);
     }
 
     private function obtainLists(Boards $boards): ListsBoards
     {
 
-        return app(ListsBoards::class, ['wrapper' => $this->wrapper, 'boards' => $boards]);
+        return app(ListsBoards::class, ['wrapper' => $this->trelloWrapper, 'boards' => $boards]);
     }
 
     private function obtainCards(Collection $lists): Cards
     {
 
-        return app(Cards::class, ['wrapper' => $this->wrapper, 'listsBoards' => $lists]);
+        return app(Cards::class, ['wrapper' => $this->trelloWrapper, 'listsBoards' => $lists]);
 
     }
 
