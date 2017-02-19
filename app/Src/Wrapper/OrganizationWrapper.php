@@ -4,7 +4,6 @@ namespace LaraTrell\Src\Wrapper;
 
 class OrganizationWrapper
 {
-
     private $organization;
 
     public function __construct(array $organization)
@@ -21,5 +20,4 @@ class OrganizationWrapper
     {
         return $this->organization['displayName'];
     }
-
 }

@@ -7,7 +7,6 @@ use LaraTrell\Src\Wrapper\TrelloWrapper;
 
 class Boards
 {
-
     private $wrapper;
     private $boards;
 
@@ -17,7 +16,6 @@ class Boards
         $this->boards = collect();
 
         $this->obtainBoards();
-
     }
 
     public function getBoards()
@@ -27,19 +25,15 @@ class Boards
 
     private function obtainBoards()
     {
-
         $boards = $this->wrapper->obtainBoards();
 
         foreach ($boards as $board) {
-
             $boardWrapper = app(BoardWrapper::class, ['board' => $board]);
 
             if ($boardWrapper->isOpen()) {
                 $this->boards->put($boardWrapper->getId(), $boardWrapper);
             }
-
         }
-
     }
 
     public function getBoardByIdOrNull(string $idBoard): BoardWrapper
@@ -54,7 +48,6 @@ class Boards
         }
         $board = $this->getBoardByIdOrNull($idBoard);
 
-        return ! is_null($board) ? $board->getDisplayName() : '';
+        return !is_null($board) ? $board->getDisplayName() : '';
     }
-
 }

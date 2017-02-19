@@ -7,7 +7,6 @@ use Trello\Client;
 
 class TrelloWrapper
 {
-
     private $client;
     private $user;
 
@@ -16,7 +15,6 @@ class TrelloWrapper
         $this->user = $user;
 
         $this->instanceClient();
-
     }
 
     private function instanceClient()
@@ -64,6 +62,4 @@ class TrelloWrapper
     {
         return $this->client->api('organization')->show($organizationId);
     }
-
-
 }
