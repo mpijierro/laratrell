@@ -17,7 +17,7 @@ class AuthController extends Controller
      */
     public function redirectToProvider()
     {
-        return Socialite::with('trello')->redirect();
+        return Socialite::with('trello')->with(['name' => 'Laratrell'])->redirect();
     }
 
     /**
