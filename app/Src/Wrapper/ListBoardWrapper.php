@@ -4,7 +4,6 @@ namespace LaraTrell\Src\Wrapper;
 
 class ListBoardWrapper
 {
-
     private $list = [];
 
     public function __construct(array $list)
@@ -29,12 +28,11 @@ class ListBoardWrapper
 
     public function isOpen()
     {
-        return ! $this->list['closed'];
+        return !$this->list['closed'];
     }
 
     public function isNamed($name)
     {
-        return ($this->list['name'] == $name);
+        return $this->list['name'] == $name;
     }
-
 }

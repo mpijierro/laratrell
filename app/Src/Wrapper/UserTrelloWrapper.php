@@ -6,7 +6,6 @@ use Laravel\Socialite\Facades\Socialite;
 
 class UserTrelloWrapper implements UserInterfaceWrapper
 {
-
     private $user;
 
     public function __construct()
@@ -63,6 +62,4 @@ class UserTrelloWrapper implements UserInterfaceWrapper
     {
         return $this->dataUser()['idBoards'];
     }
-
-
 }

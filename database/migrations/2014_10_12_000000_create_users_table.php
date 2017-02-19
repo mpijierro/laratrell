@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateUsersTable extends Migration
 {
-
     public function up()
     {
         Schema::create('user', function (Blueprint $table) {
@@ -16,7 +15,6 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
         });
     }
-
 
     public function down()
     {

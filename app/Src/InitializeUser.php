@@ -1,6 +1,5 @@
 <?php
 
-
 namespace LaraTrell\Src;
 
 use Illuminate\Support\Facades\Auth;
@@ -8,7 +7,6 @@ use LaraTrell\Src\Wrapper\UserTrelloWrapper;
 
 class InitializeUser
 {
-
     private $userWrapper = null;
     private $user;
 
@@ -21,7 +19,6 @@ class InitializeUser
         $this->loginUser();
 
         $this->saveOauthTokenInSession();
-
     }
 
     public function getUser()
@@ -31,22 +28,19 @@ class InitializeUser
 
     private function saveOrCreateUser()
     {
-
-        if ( ! Auth::check()) {
-
+        if (!Auth::check()) {
             $trelloIdentification = [
-                'trello_id' => $this->userWrapper->getUserId(),
-                'trello_username' => $this->userWrapper->username()
+                'trello_id'       => $this->userWrapper->getUserId(),
+                'trello_username' => $this->userWrapper->username(),
             ];
 
             $this->user = User::firstOrCreate($trelloIdentification);
         }
-
     }
 
     private function loginUser()
     {
-        if ( ! Auth::check()) {
+        if (!Auth::check()) {
             Auth::loginUsingId($this->getUser()->id);
         }
     }

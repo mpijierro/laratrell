@@ -9,7 +9,6 @@ use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
-
     /**
      * Redirect the user to the Trello authentication page.
      *
@@ -21,13 +20,12 @@ class AuthController extends Controller
     }
 
     /**
-     * Obtain the user information from Trello
+     * Obtain the user information from Trello.
      *
      * @return Response
      */
     public function handleProviderCallback()
     {
-
         $user = app(UserTrelloWrapper::class);
 
         $initialize = app(InitializeUser::class, ['userWrapper' => $user]);
@@ -37,11 +35,8 @@ class AuthController extends Controller
 
     public function logout()
     {
-
         Auth::logout();
 
         return redirect()->route('home');
-
     }
-
 }

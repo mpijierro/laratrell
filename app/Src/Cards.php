@@ -8,7 +8,6 @@ use LaraTrell\Src\Wrapper\TrelloWrapper;
 
 class Cards
 {
-
     private $wrapper;
     private $listsBoards;
     private $cards;
@@ -20,7 +19,6 @@ class Cards
         $this->cards = collect();
 
         $this->obtainCards();
-
     }
 
     public function getCards()
@@ -30,20 +28,15 @@ class Cards
 
     private function obtainCards()
     {
-
         foreach ($this->listsBoards as $listBoardWrapper) {
-
             $cards = $this->wrapper->obtainCardsFromCardList($listBoardWrapper->getId());
 
             foreach ($cards as $card) {
-
                 $cardWrapper = app(CardWrapper::class, ['card' => $card]);
 
                 $this->cards->put($cardWrapper->getId(), $cardWrapper);
             }
-
         }
-
     }
 
     public function getCardByIdOrNull(string $idCard): CardWrapper
@@ -53,10 +46,9 @@ class Cards
 
     public function getCardNameById(string $idCard = null): string
     {
-
         $card = $this->getCardByIdOrNull($idCard);
 
-        return ! is_null($card) ? $card->getDisplayName() : '';
+        return !is_null($card) ? $card->getDisplayName() : '';
     }
 
     public function getCardByIdList($idList): Collection
@@ -65,5 +57,4 @@ class Cards
             return $cardWrapper->getIdList() == $idList;
         });
     }
-
 }

@@ -2,7 +2,6 @@
 
 return [
 
-
     'username' => env('LARATRELL_USERNAME', ''),
 
     //Trello private token/username/client ID

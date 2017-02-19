@@ -1,6 +1,5 @@
 <?php
 
-
 namespace LaraTrell\Src;
 
 use Illuminate\Support\Collection;
@@ -10,7 +9,6 @@ use LaraTrell\Src\Wrapper\OrganizationWrapper;
 
 class BoardDoing
 {
-
     /**
      * @var OrganizationWrapper
      */
@@ -50,5 +48,4 @@ class BoardDoing
     {
         return $this->cards;
     }
-
 }

@@ -4,7 +4,6 @@ namespace LaraTrell\Src\Wrapper;
 
 class BoardWrapper
 {
-
     private $board = [];
 
     public function __construct(array $board)
@@ -29,8 +28,6 @@ class BoardWrapper
 
     public function isOpen()
     {
-        return ! $this->board['closed'];
+        return !$this->board['closed'];
     }
-
-
 }
