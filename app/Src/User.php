@@ -12,8 +12,7 @@ class User extends Authenticatable
     public $timestamps = false;
 
     protected $table = 'user';
-    protected $fillable = ['trello_id', 'trello_username',];
-
+    protected $fillable = ['trello_id', 'trello_username'];
 
     public function trelloId()
     {
@@ -24,5 +23,4 @@ class User extends Authenticatable
     {
         return $this->attributes['trello_username'];
     }
-
 }

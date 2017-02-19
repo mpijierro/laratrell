@@ -4,12 +4,10 @@ namespace LaraTrell\Src\Wrapper;
 
 class UserSessionWrapper implements UserInterfaceWrapper
 {
-
     private $user;
 
     public function __construct()
     {
-
         if (session()->has('trello_user')) {
             $this->user = session()->get('trello_user');
         } else {
@@ -78,5 +76,4 @@ class UserSessionWrapper implements UserInterfaceWrapper
     {
         return $this->user['idBoards'];
     }
-
 }

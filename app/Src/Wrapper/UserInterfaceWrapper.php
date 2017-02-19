@@ -2,10 +2,8 @@
 
 namespace LaraTrell\Src\Wrapper;
 
-
 interface UserInterfaceWrapper
 {
-
     public function getUser();
 
     public function token();
@@ -23,5 +21,4 @@ interface UserInterfaceWrapper
     public function getUserId();
 
     public function getIdBoards();
-
 }

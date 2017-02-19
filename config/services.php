@@ -20,7 +20,7 @@ return [
     ],
 
     'ses' => [
-        'key' => env('SES_KEY'),
+        'key'    => env('SES_KEY'),
         'secret' => env('SES_SECRET'),
         'region' => 'us-east-1',
     ],
@@ -30,15 +30,14 @@ return [
     ],
 
     'stripe' => [
-        'model' => LaraTrell\User::class,
-        'key' => env('STRIPE_KEY'),
+        'model'  => LaraTrell\User::class,
+        'key'    => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
     'trello' => [
-        'client_id' => env('TRELLO_KEY'),
+        'client_id'     => env('TRELLO_KEY'),
         'client_secret' => env('TRELLO_SECRET'),
-        'redirect' => env('TRELLO_REDIRECT_URI'),
+        'redirect'      => env('TRELLO_REDIRECT_URI'),
     ],
-
 
 ];

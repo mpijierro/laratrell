@@ -4,7 +4,6 @@ namespace LaraTrell\Src\Wrapper;
 
 class CardWrapper
 {
-
     private $card = [];
 
     public function __construct(array $card)
@@ -39,7 +38,7 @@ class CardWrapper
 
     public function cardIsOpen()
     {
-        return ! $this->card['closed'];
+        return !$this->card['closed'];
     }
 
     public function getShortUrl()

@@ -6,7 +6,6 @@ use LaraTrell\Src\Wrapper\OrganizationWrapper;
 
 class BuilderDashboard
 {
-
     private $organizations;
     private $boards;
     private $lists;
@@ -16,7 +15,6 @@ class BuilderDashboard
 
     public function __construct(Organizations $organizations, Boards $boards, ListsBoards $lists, Cards $cards)
     {
-
         $this->organizations = $organizations;
         $this->boards = $boards;
         $this->lists = $lists;
@@ -25,7 +23,6 @@ class BuilderDashboard
         $this->boardsDoing = collect();
 
         $this->build();
-
     }
 
     public function getBoardsDoing()
@@ -33,39 +30,31 @@ class BuilderDashboard
         return $this->boardsDoing;
     }
 
-
     public function build()
     {
-
         foreach ($this->lists->obtainListNamedAs('Doing') as $list) {
-
             $board = $this->obtainBoard($list->getIdBoard());
 
             $organization = $this->obtainOrganization($board->getIdOrganization());
 
             $cards = $this->obtainCards($list->getId());
 
-            if ( ! $cards->isEmpty()) {
-
+            if (!$cards->isEmpty()) {
                 $boardDoing = app(BoardDoing::class, [
                     'organization' => $organization,
-                    'board' => $board,
-                    'list' => $list,
-                    'cards' => $cards
+                    'board'        => $board,
+                    'list'         => $list,
+                    'cards'        => $cards,
                 ]);
 
                 $this->boardsDoing->put($board->getName(), $boardDoing);
-
             }
         }
-
     }
-
 
     private function obtainOrganization($idOrganization)
     {
-
-        if ( ! $idOrganization) {
+        if (!$idOrganization) {
             return $this->obtainOrganizationWrapperWithoutOrganization();
         }
 
@@ -74,7 +63,6 @@ class BuilderDashboard
         if (is_null($organization)) {
             return $this->obtainOrganizationWrapperWithoutOrganization();
         }
-
 
         return $organization;
     }
