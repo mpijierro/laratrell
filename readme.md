@@ -7,6 +7,8 @@ The main objetive is show in one view all cards with jobs from some Trello board
  
 Documentation is under development...
 
+More information: https://medium.com/@mpijierro/laratrell-mi-aplicaci%C3%B3n-para-mejorar-la-visibilidad-de-los-tableros-entrello-88992d2320db
+
 ## Installing
 
 1. Clone project
